@@ -2,10 +2,10 @@ const usernameInput = document.getElementById('username-input');
 const passwordInput = document.getElementById('password-input');
 const loginButton = document.getElementById('login-button');
 
-loginButton.addEventListener('click', () => {
-  const username = usernameInput.value;
-  const password = passwordInput.value;
-  /*  try {
+/* 
+const username = usernameInput.value;
+const password = passwordInput.value;
+  try {
       if (loginDetails[username] == password) {
         throw 'Correct!'
       } else if (loginDetails[username] == undefined){
