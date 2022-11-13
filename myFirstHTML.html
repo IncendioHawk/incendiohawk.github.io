@@ -1,0 +1,39 @@
+<!DOCTYPE hmtl>
+<html lang="en-GB">
+<head>
+  <title>My first HTML project</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Archie Nassif">
+  <link rel="icon" href="images/testTube.ico">
+  <link rel="stylesheet" href="myStyles.css">
+  <script src="myScript.js"></script>
+</head>
+<body>
+  <header>
+    <h1 id="site-title">My first webpage</h1>
+    <h3><a id="log-in" href="login.html"> Log In</a></h3>
+  </header>
+  <hr>
+  <div class="projects">
+    <h1>My projects</h1>
+    <button onclick="dropDown()" id="expand-contents" aria-label="Expand">></button>
+      <ul id="my-projects" style="display: none;">
+        <li>Any sided die</li>
+        <li>Timer/Stopwatch</li>  
+        <li>Rock, Paper, Scissors</li>
+        <li>Tip calculator</li>
+        <li>Weather app</li>
+        
+      </ul>
+  </div>
+  <footer>
+    <ul>
+      <li class="is-horizontal"><a href="https://www.reddit.com/user/IncendioHawk"><img class="expand-on-hover" src="images/redditLogo.png"></a></li>
+      <li class="is-horizontal"><a href="https://www.youtube.com/channel/UCbp7aM2xTk3D-xYz-ZX4WOQ"><img class="expand-on-hover" src="images/youtubeLogo.png"></a></li>
+      <li class="is-horizontal"><a href="mailto:incendiohawk@gmail.com"><img class="expand-on-hover" src="images/emailLogo.png"></a></li>
+      <li class="is-horizontal"><a href="https://github.com/IncendioHawk"><img class="expand-on-hover" src="images/githubLogo.png"></a></li>
+    </ul>
+  </footer>
+</body>
+</html>
