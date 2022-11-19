@@ -25,7 +25,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
 
-app.get('/loginBackend', (req, res) => {
+app.get('https://incendiohawk.github.io/loginBackend', (req, res) => {
   res.send(`Username: ${req.body[login-input]} \nPassword: ${req.body[password-input]}`)
 });
 console.log('test');
