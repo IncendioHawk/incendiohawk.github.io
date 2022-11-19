@@ -23,10 +23,10 @@ fs.readFile('./login-details.json', 'utf8', function (err, data) {
 */
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
 
-app.get('/', (req, res) => {
-  res.send('hello')
-  console.log(req)
+app.get('/loginBackend', (req, res) => {
+  res.send(`Username: ${req.body[login-input]} \nPassword: ${req.body[password-input]}`)
 });
 console.log('test');
 
