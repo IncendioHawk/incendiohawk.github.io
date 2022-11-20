@@ -1,0 +1,41 @@
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+#profile-pic-example {
+  width: 250px;
+  border-radius: 125px;
+  margin-bottom: 50px;
+}
+
+.login-container {
+  padding: 10px;
+  margin: 50px;
+  border: 2px solid rgb(230, 230, 230);
+}
+
+.details-input {
+  display: grid;
+}
+
+
+#login-button {
+  font-weight: bold;
+}
+
+#no-login {
+  border: 1px solid black;
+  padding: 5px;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(240, 240, 240);
+  border-radius: 4px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(80, 80, 255);
+}

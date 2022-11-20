@@ -1,0 +1,28 @@
+<!DOCTYPE hmtl>
+<html lang="en-GB">
+<head>
+  <title>My login page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Archie Nassif">
+  <link rel="icon" href="login-icon.ico">
+  <link rel="stylesheet" href="login.css">
+  <script src="login.js" defer></script>
+</head>
+<body>
+  <div class="login-container">
+    <div class="profile-pic-example-container">
+      <img id="profile-pic-example" src="img_avatar.png" alt="Image Avatar">
+    </div>
+    <form method="post" action="http://localhost:8080/loginBackend" class="details-input">
+      <label for="username-input">Username:</label>
+      <input name="username-input" type="text" id="username-input" required>
+      <label for="password-input">Password:</label>
+      <input name="password-input" type="password" id="password-input" required>
+      <input type="submit" value="Login" id="login-button">
+    </form> 
+    <p id="no-login">Don't have an account? <a href="signup.html">Sign up</a></p>
+    <p id="incorrect-login"></p>
+  </div>  
+</body>
+</html>

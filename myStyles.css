@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+#site-title {
+  color: #ffffff;
+  padding: 16px;
+  margin-right: 85%;
+  background-color: #ff0000;
+  font-family: 'Times New Roman';
+}
+
+header {
+  position: relative;
+}
+
+#log-in, #sign-up {
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  border: 2px solid blue;
+  border-radius: 4px;
+  padding: 8px 10px;
+  background-color: white;
+  color: blue;
+  cursor: pointer;
+}
+
+#log-in {
+  transition: background-color 0.15s, color 0.15s;
+}
+
+#log-in:hover {
+  background-color: blue;
+  color: white
+}
+
+#sign-up {
+  right: 100px;
+  border: 2px solid white;
+  background-color: blue;
+  color: white;
+  transition: background-color 0.15s;
+}
+
+#sign-up:hover {
+  background-color: rgb(17, 29, 196);
+}
+
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+li a {
+  text-align: center;
+  padding: 12px;
+  margin: 10px;
+  display: block;
+  text-decoration: none;
+  color: #ffffff;
+}
+.expand-on-hover {
+  height: 35px; 
+  width: auto
+}
+.expand-on-hover:hover {
+  height: 38px;
+}
+.is-horizontal {
+  float: left;
+}
+.expand-contents {
+  border: 2px solid blue;
+  border-radius: 50px;
+}
+
+.my-links {
+  position: absolute;
+  bottom: 0;
+}
