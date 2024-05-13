@@ -17,7 +17,7 @@
             margin-right: 5px;
         }
 
-        button[type="submit"] {
+        button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
@@ -41,7 +41,7 @@
             background-color: #f2f2f2;
         }
 
-        #timetable, #second-week-timetable {
+        #timetable{
             margin-bottom: 20px;
         }
     </style>
@@ -129,7 +129,8 @@
         <!-- Add a placeholder for the second week timetable -->
         <div id="second-week-timetable"></div>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script> -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
         <script>
             const msInDay = 86400000
             // Add JavaScript code to handle form submission and generate the timetable
@@ -147,15 +148,33 @@
 
                 const exportButton = document.querySelector('.export')
                 exportButton.hidden = false
-                const { jsPDF } = window.jspdf;
-                exportButton.addEventListener('click', function() {
-                    const doc = new jsPDF();
-                    doc.html(timetable, {
-                        callback: function (doc) {
-                            doc.save('timetable.pdf');
-                    }
+                // const { jsPDF } = window.jspdf;
+                exportButton.addEventListener('click', async function() {
+                    // const doc = new jsPDF()
+                    // doc.fromHTML(timetable)
+                    // doc.save('examTimetable.pdf')
+                    await downloadPDF(timetable, 'examTimetable')
                 });
             });
+
+            async function downloadPDF(element, name) {
+                const options = {
+                    image: { type: "jpeg", quality: 0.95 },
+                    html2canvas: { scale: 3 },
+                    jsPDF: {
+                    format: "a4",
+                    orientation: "portrait",
+                    },
+                    margin: [12, 0],
+                    pagebreak: { avoid: ".section", mode: "css" },
+                };
+                const fileName = name
+
+                await html2pdf()
+                    .from(element)
+                    .set(options)
+                    .save(`${fileName}.pdf`);
+            }
             function generateTimetableHTML(selectedSubjects) {
                 const startDate = new Date('2024-06-03')
                 const timetableHTML = `
