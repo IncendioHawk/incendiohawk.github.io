@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exam Timetable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        #timetable, #second-week-timetable {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exam Timetable</h1>
+    
+    <form>
+        <h2>Select your subjects:</h2>
+        
+        <input type="checkbox" id="maths" name="maths" value="Maths" checked>
+        <label for="maths">Maths</label><br>
+        
+        <input type="checkbox" id="english-language" name="english-language" value="English Language" checked>
+        <label for="english-language">English Language</label><br>
+        
+        <input type="checkbox" id="english-literature" name="english-literature" value="English Literature" checked>
+        <label for="english-literature">English Literature</label><br>
+        
+        <input type="checkbox" id="physics" name="physics" value="Physics" checked>
+        <label for="physics">Physics</label><br>
+        
+        <input type="checkbox" id="chemistry" name="chemistry" value="Chemistry" checked>
+        <label for="chemistry">Chemistry</label><br>
+
+        <input type="checkbox" id="biology" name="biology" value="Biology" checked>
+        <label for="biology">Biology</label><br>
+
+        <input type="checkbox" id="french" name="french" value="French">
+        <label for="french">French</label><br>
+
+        <input type="checkbox" id="drama" name="drama" value="Drama">
+        <label for="drama">Drama</label><br>
+
+        <input type="checkbox" id="pe" name="pe" value="PE">
+        <label for="pe">PE</label><br>
+
+        <input type="checkbox" id="design-technology" name="design-technology" value="DT">
+        <label for="design-technology">DT</label><br>
+
+        <input type="checkbox" id="spanish" name="spanish" value="Spanish">
+        <label for="spanish">Spanish</label><br>
+
+        <input type="checkbox" id="german" name="german" value="German">
+        <label for="german">German</label><br>
+
+        <input type="checkbox" id="history" name="history" value="History">
+        <label for="history">History</label><br>
+
+        <input type="checkbox" id="re" name="re" value="RE" checked>
+        <label for="re">RE</label><br>
+
+        <input type="checkbox" id="reRevision" name="reRevision" value="RE Revision" checked>
+        <label for="reRevision">RE Revision</label><br>
+
+        <input type="checkbox" id="food" name="food" value="Food">
+        <label for="food">Food</label><br>
+
+        <input type="checkbox" id="computer-science" name="computer-science" value="Computer Science">
+        <label for="computer-science">Computer Science</label><br>
+
+        <input type="checkbox" id="latin" name="latin" value="Latin">
+        <label for="latin">Latin</label><br>
+
+        <input type="checkbox" id="psychology" name="psychology" value="Psychology">
+        <label for="psychology">Psychology</label><br>
+
+        <input type="checkbox" id="geography" name="geography" value="Geography">
+        <label for="geography">Geography</label><br>
+
+        <input type="checkbox" id="business-studies" name="business-studies" value="Business Studies">
+        <label for="business-studies">Business Studies</label><br>
+
+        <input type="checkbox" id="music" name="music" value="Music">
+        <label for="music">Music</label><br>
+
+        <br>
+        <button type="submit">Generate Timetable</button>
+        <button class="export" hidden>Export Timetable to PDF</button>
+        </form>
+
+        <!-- Add a placeholder for the generated timetable -->
+        <div id="timetable"></div>
+
+        <!-- Add a placeholder for the second week timetable -->
+        <div id="second-week-timetable"></div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script>
+            const msInDay = 86400000
+            // Add JavaScript code to handle form submission and generate the timetable
+            document.querySelector('form').addEventListener('submit', function(event) {
+                event.preventDefault()
+
+                // Get the selected subjects
+                const selectedSubjects = Array.from(document.querySelectorAll('input[type="checkbox"]:checked')).map(subject => subject.value)
+
+                // Generate the timetable HTML for the first week
+                const timetableHTML = generateTimetableHTML(selectedSubjects)
+
+                const timetable = document.getElementById('timetable')
+                timetable.innerHTML = timetableHTML
+
+                const exportButton = document.querySelector('.export')
+                exportButton.hidden = false
+                const { jsPDF } = window.jspdf;
+                exportButton.addEventListener('click', function() {
+                    const doc = new jsPDF();
+                    doc.html(timetable, {
+                        callback: function (doc) {
+                            doc.save('timetable.pdf');
+                    }
+                });
+            });
+            function generateTimetableHTML(selectedSubjects) {
+                const startDate = new Date('2024-06-03')
+                const timetableHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Monday ${startDate.toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Tuesday ${(new Date(startDate.getTime() + msInDay * 1)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Wednesday ${(new Date(startDate.getTime() + msInDay * 2)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Thursday ${(new Date(startDate.getTime() + msInDay * 3)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Friday ${(new Date(startDate.getTime() + msInDay * 4)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>09:00</td>
+                                <td>${selectedSubjects.includes('French') ? 'French' : selectedSubjects.includes('Drama') ? 'Drama' : selectedSubjects.includes('PE') ? 'PE' : ''}</td>
+                                <td>${selectedSubjects.includes('DT') ? 'DT' : ''}</td>
+                                <td>${selectedSubjects.includes('Chemistry') ? 'Chemistry' : ''}</td>
+                                <td></td>
+                                <td>${selectedSubjects.includes('RE') ? 'RE' : ''}</td>
+                            </tr>
+                            <tr>
+                                <td>10:00</td>
+                                <td>${selectedSubjects.includes('French') ? 'French' : selectedSubjects.includes('Drama') ? 'Drama' : selectedSubjects.includes('PE') ? 'PE' : ''}</td>
+                                <td>${selectedSubjects.includes('DT') ? 'DT' : ''}</td>
+                                <td>${selectedSubjects.includes('Chemistry') ? 'Chemistry' : ''}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>11:20</td>
+                                <td>${selectedSubjects.includes('English Language') ? 'English Language' : ''}</td>
+                                <td>${selectedSubjects.includes('Spanish') ? 'Spanish' : selectedSubjects.includes('German') ? 'German' : ''}</td>
+                                <td>${selectedSubjects.includes('History') ? 'History' : ''}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>12:20</td>
+                                <td>${selectedSubjects.includes('English Language') ? 'English Language' : ''}</td>
+                                <td>${selectedSubjects.includes('Spanish') ? 'Spanish' : selectedSubjects.includes('German') ? 'German' : ''}</td>
+                                <td>${selectedSubjects.includes('History') ? 'History' : ''}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>14:10</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>${selectedSubjects.includes('RE Revision') ? 'RE Revision' : ''}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Monday ${(new Date(startDate.getTime() + msInDay * 5)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Tuesday ${(new Date(startDate.getTime() + msInDay * 6)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Wednesday ${(new Date(startDate.getTime() + msInDay *7)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Thursday ${(new Date(startDate.getTime() + msInDay * 8)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Friday ${(new Date(startDate.getTime() + msInDay * 9)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>09:00</td>
+                                <td>${selectedSubjects.includes('Food') ? 'Food' : ''}</td>
+                                <td>${selectedSubjects.includes('Maths') ? 'Maths' : ''}</td>
+                                <td>${selectedSubjects.includes('Geography') ? 'Geography' : ''}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>10:00</td>
+                                <td>${selectedSubjects.includes('Food') ? 'Food' : ''}</td>
+                                <td>${selectedSubjects.includes('Maths') ? 'Maths' : ''}</td>
+                                <td>${selectedSubjects.includes('Geography') ? 'Geography' : ''}</td>
+                                <td>${selectedSubjects.includes('English Literature') ? 'English Literature' : ''}</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>11:20</td>
+                                <td>${selectedSubjects.includes('Computer Science') ? 'Computer Science' : selectedSubjects.includes('Latin') ? 'Latin' : selectedSubjects.includes('Psychology') ? 'Psychology' : ''}</td>
+                                <td>${selectedSubjects.includes('Biology') ? 'Biology' : ''}</td>
+                                <td>${selectedSubjects.includes('Business Studies') ? 'Business Studies' : ''}</td>
+                                <td>${selectedSubjects.includes('Physics') ? 'Physics' : ''}</td>
+                                <td>${selectedSubjects.includes('Music') ? 'Music' : ''}</td>
+                            </tr>
+                            <tr>
+                                <td>12:20</td>
+                                <td>${selectedSubjects.includes('Computer Science') ? 'Computer Science' : selectedSubjects.includes('Latin') ? 'Latin' : selectedSubjects.includes('Psychology') ? 'Psychology' : ''}</td>
+                                <td>${selectedSubjects.includes('Biology') ? 'Biology' : ''}</td>
+                                <td>${selectedSubjects.includes('Business Studies') ? 'Business Studies' : ''}</td>
+                                <td>${selectedSubjects.includes('Physics') ? 'Physics' : ''}</td>
+                                <td>${selectedSubjects.includes('Music') ? 'Music' : ''}</td>
+                            </tr>
+                            <tr>
+                                <td>14:10</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `
+                return timetableHTML
+            }
+        </script>
+        </body>
+        </html>
