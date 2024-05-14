@@ -1,2 +1,2 @@
 Exam timetable creator
-incendiohawk.github.io
+https://incendiohawk.github.io
