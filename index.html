@@ -176,7 +176,7 @@
                     format: "a4",
                     orientation: "portrait",
                     },
-                    margin: [12, 0],
+                    margin: [12, 12],
                     pagebreak: { avoid: ".section", mode: "css" },
                 };
                 const fileName = name
@@ -247,11 +247,11 @@
                         <thead>
                             <tr>
                                 <th></th>
-                                <th>Monday ${(new Date(startDate.getTime() + msInDay * 5)).toLocaleDateString('en-UK').substring(0, 5)}</th>
-                                <th>Tuesday ${(new Date(startDate.getTime() + msInDay * 6)).toLocaleDateString('en-UK').substring(0, 5)}</th>
-                                <th>Wednesday ${(new Date(startDate.getTime() + msInDay *7)).toLocaleDateString('en-UK').substring(0, 5)}</th>
-                                <th>Thursday ${(new Date(startDate.getTime() + msInDay * 8)).toLocaleDateString('en-UK').substring(0, 5)}</th>
-                                <th>Friday ${(new Date(startDate.getTime() + msInDay * 9)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Monday ${(new Date(startDate.getTime() + msInDay * 7)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Tuesday ${(new Date(startDate.getTime() + msInDay * 8)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Wednesday ${(new Date(startDate.getTime() + msInDay * 9)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Thursday ${(new Date(startDate.getTime() + msInDay * 10)).toLocaleDateString('en-UK').substring(0, 5)}</th>
+                                <th>Friday ${(new Date(startDate.getTime() + msInDay * 11)).toLocaleDateString('en-UK').substring(0, 5)}</th>
                             </tr>
                         </thead>
                         <tbody>
